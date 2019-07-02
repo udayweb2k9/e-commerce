@@ -1,15 +1,14 @@
 <?php
-
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Shop extends Model
+class Productsize extends Model
 {
     protected $connection = 'mysql';
-    protected $table = 'products';
+    protected $table = 'product_size';
     
     protected $fillable = [
-        'name', 'status','price'
+        'product_id', 'size_value'
     ];
 }

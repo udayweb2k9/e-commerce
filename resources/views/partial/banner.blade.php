@@ -1,6 +1,6 @@
 <div class="flexslider">
     <ul class="slides">
-    <li style="background-image: url(frontend/images/cover-img-1.jpg);">
+    <li style="background-image: url('{{ url('frontend/images/cover-img-1.jpg') }}') ;">
         <div class="overlay"></div>
         <div class="container-fluid">
             <div class="row">

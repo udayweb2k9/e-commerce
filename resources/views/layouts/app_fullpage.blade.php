@@ -6,7 +6,7 @@
             @include('partial.top')
 		</nav>
 		<aside id="colorlib-hero" class="breadcrumbs">
-        	@yield('banner')
+			@include('partial.banner')
 		</aside>
 		@yield('content')	
 		@include('partial.newsletter')
@@ -20,4 +20,4 @@
 		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>
 	
-    @include('partial.footer')
+    @include('partial.footer') 
