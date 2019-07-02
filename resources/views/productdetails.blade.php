@@ -40,11 +40,13 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="product_id" id="product_id" value="{{ $shop['id'] }}" />
+                        <input type="hidden" name="_token" id="csrf" value="{{ csrf_token() }}" />
                         <div class="col-md-7">
                             <div class="desc">
-                                <h3>Dummy Product Name</h3>
+                                <h3>{{ $shop['product_name'] }}</h3>
                                 <p class="price">
-                                    <span>$68.00</span> 
+                                    <span>${{ $shop['product_price'] }}</span> 
                                     <span class="rate text-right">
                                         <i class="icon-star-full"></i>
                                         <i class="icon-star-full"></i>
@@ -93,7 +95,9 @@
                             </div>
                             </div>
                                 </div>
-                                <p><a href="cart.html" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+                                <p>
+                                    <span id="add_to_cart"  class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -351,5 +355,30 @@
 </div>
 
 
+@endsection
+@section('script')
+<script>
+    $(function(){
+        $("#add_to_cart").click(function()
+        {
+            var cart_data = {};
+            cart_data.quantity = $("#quantity").val();
+            cart_data.product_id = $("#product_id").val();
+            cart_data._token = $("#csrf").val();
+            
+            console.log(cart_data);
+            $.ajax({
+                type: "POST",
+                url: '../../addcart',
+                data: cart_data,
+                success: function(response){
+                    console.log(response);
+                }
+            }); 
+        });
+    });
+    
+    
+</script>
 @endsection
 

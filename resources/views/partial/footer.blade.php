@@ -1,5 +1,4 @@
-	<!-- jQuery -->
-	<script src="{{ url('frontend/js/jquery.min.js') }}"></script>
+	
 	<!-- jQuery Easing -->
 	<script src="{{ url('frontend/js/jquery.easing.1.3.js') }}"></script>
 	<!-- Bootstrap -->

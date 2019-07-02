@@ -47,12 +47,15 @@
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="{{ url('frontend/css/style.css') }}">
 
+	<!-- jQuery -->
+	<script src="{{ url('frontend/js/jquery.min.js') }}"></script>
+	
 	<!-- Modernizr JS -->
 	<script src="{{ url('frontend/js/modernizr-2.6.2.min.js') }}"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	@yield('script')
 	</head>
 	<body>
