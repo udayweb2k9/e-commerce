@@ -8,23 +8,7 @@
 		<aside id="colorlib-hero" class="breadcrumbs">
         	@yield('banner')
 		</aside>
-
-		<div id="colorlib-about">
-			<div class="container">
-				<div class="row">
-					<div class="about-flex">
-						<div class="col-one-forth">
-                            @include('partial.inner_left')
-						</div>
-						<div class="col-three-forth">
-							@yield('content')	
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+		@yield('content')	
 		@include('partial.newsletter')
 
 		<footer id="colorlib-footer" role="contentinfo">

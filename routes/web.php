@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('about','ContentAboutController@about');
 Route::get('addabout','ContentAboutController@addabout');
 Route::post('addabout','ContentAboutController@storeabout');
+Route::get('shop','ShopController@products');
+Route::get('shop/details/{id}','ShopController@productdetails');

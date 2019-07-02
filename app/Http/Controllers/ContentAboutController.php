@@ -10,8 +10,18 @@ class ContentAboutController extends Controller
     //
 	public function about()
     {
-        $contentabout = Contentabout::where('page_title','about-us')->first();
-        return view('about');
+        $contentabout = Contentabout::where('page_title','about-us')->where('status',1)->first();
+        $content=[
+            'id' => $contentabout->_id,
+            'page_title' => $contentabout->page_title,
+            'display_title' => $contentabout->display_title,
+            'page_content' => $contentabout->page_content,
+            'status' => $contentabout->status,
+            'updated_at' => $contentabout->updated_at,
+            'created_at' => $contentabout->created_at
+        ];
+       
+        return view('about',['content'=>$content]);
     }
 
     public function addabout()

@@ -23,32 +23,32 @@
 	<link href="frontend/css/fonts.css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="frontend/css/animate.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/animate.css') }} ">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="frontend/css/icomoon.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/icomoon.css') }}">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="frontend/css/bootstrap.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/bootstrap.css') }}">
 
 	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="frontend/css/magnific-popup.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/magnific-popup.css') }}">
 
 	<!-- Flexslider  -->
-	<link rel="stylesheet" href="frontend/css/flexslider.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/flexslider.css') }}">
 
 	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="frontend/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="frontend/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/owl.carousel.min.css') }}">
+	<link rel="stylesheet" href="{{ url('frontend/css/owl.theme.default.min.css') }}">
 	
 	<!-- Date Picker -->
-	<link rel="stylesheet" href="frontend/css/bootstrap-datepicker.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/bootstrap-datepicker.css') }}">
 	<!-- Flaticons  -->
-	<link rel="stylesheet" href="frontend/fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" href="{{ url('frontend/fonts/flaticon/font/flaticon.css') }}">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="frontend/css/style.css">
+	<link rel="stylesheet" href="{{ url('frontend/css/style.css') }}">
 
 	<!-- Modernizr JS -->
-	<script src="frontend/js/modernizr-2.6.2.min.js"></script>
+	<script src="{{ url('frontend/js/modernizr-2.6.2.min.js') }}"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>

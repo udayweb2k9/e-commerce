@@ -8,7 +8,7 @@
 				<ul>
 					<li class="active"><a href="{{ url('/') }}">Home</a></li>
 					<li class="has-dropdown">
-						<a href="shop.html">Shop</a>
+						<a href="{{ url('shop') }}">Shop</a>
 						<ul class="dropdown">
 							<li><a href="product-detail.html">Product Detail</a></li>
 							<li><a href="cart.html">Shipping Cart</a></li>
