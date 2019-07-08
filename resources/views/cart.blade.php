@@ -118,10 +118,10 @@
                                     <p><span>Delivery:</span> <span>${{ $delivary }}</span></p>
                                 </div>
                                 <div class="grand-total">
-                                    <p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+                                    <p><span><strong>Total:</strong></span> <span>${{ $total }}</span></p>
                                 </div>
                                 <div class="grand-total">
-                                    <p><a href="shop.html"class="btn btn-primary">Checkout</a></p>
+                                    <p><a href="{{ $redirect }}"class="btn btn-primary">Checkout</a></p>
                                 </div>
                                 
                             </div>

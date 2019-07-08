@@ -75,7 +75,49 @@ class CartController extends Controller
         }
        
         $delivary = number_format($delivary_price,2);
-        return view('cart', ['cart'=>$cart, 'subtotal' =>number_format($subtotal,2), 'delivary'=>$delivary]);
+        $total = number_format(($subtotal+$delivary_price),2);
+        $redirect="login";
+        if(Auth::check()){
+            $redirect = "checkout";
+        }
+        return view('cart', [
+            'cart'=>$cart, 
+            'subtotal' =>number_format($subtotal,2), 
+            'delivary'=>$delivary, 
+            'total' =>$total, 
+            'redirect' =>$redirect
+        ]);
+    }
+
+    public function checkout()
+    {
+        $session_id = Session::getId();
+        $cart_details = Tempcart::where('session_id',$session_id)->get();
+        $cart=[];
+        $subtotal =0;
+        $delivary_price = 0;
+        foreach($cart_details as $details)
+        {
+           
+            $shop = Shop::where('id',$details->product_id)->first();
+            $subtotal = $subtotal+$shop->price*$details->quantity;
+            $cart[]=[
+                'id' => $details->id,
+                'product_name' => $shop->name,
+                'product_price' => number_format($shop->price,2),
+                'product_quantity' => $details->quantity,
+                'product_price_total' => number_format(($shop->price*$details->quantity),2),
+            ];
+        }
+       
+        $delivary = number_format($delivary_price,2);
+        $total = number_format(($subtotal+$delivary_price),2);
+        return view('checkout', [
+            'cart'=>$cart, 
+            'subtotal' =>number_format($subtotal,2), 
+            'delivary'=>$delivary, 
+            'total' =>$total
+        ]);
     }
 
     
