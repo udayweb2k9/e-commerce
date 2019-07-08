@@ -20,7 +20,7 @@
 					<li><a href="blog.html">Blog</a></li>
 					<li><a href="{{ url('about') }}">About </a></li>
 					<li><a href="contact.html">Contact</a></li>
-					<li><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+					<li><a href="{{ url('cart') }}"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
 				</ul>
 			</div>
 		</div>

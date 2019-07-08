@@ -27,8 +27,9 @@ class ShopController extends Controller
 
     public function productdetails($id)
     {
+        //dd(Shop::where('status',1)->where('id',$id)->first());
         $shop = Shop::where('status',1)->where('id',$id)->first();
-        
+        //dd($shop->toArray());
         $color_arr=[];
         if(Productcolor::where('product_id',$id)->count()>0)
         {
@@ -42,7 +43,7 @@ class ShopController extends Controller
                 ];
             }
         }
-
+        
         $size_arr=[];
         if(Productcolor::where('product_id',$id)->count()>0)
         {

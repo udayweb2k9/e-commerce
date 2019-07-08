@@ -4,6 +4,9 @@
 @section('content')
 <div class="colorlib-shop">
     <div class="container">
+    <div class="alert alert-success" style="display:none">
+        Data updated in Cart successfully.
+    </div>
         <div class="row row-pb-lg">
             <div class="col-md-10 col-md-offset-1">
                 <div class="product-detail-wrap">
@@ -38,7 +41,7 @@
                                         (74 Rating)
                                     </span>
                                 </p>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                                <p><p>{!! $shop['product_description'] !!}</p></p>
                                 <div class="color-wrap">
                                     <p class="color-desc">
                                         Color: 
@@ -161,6 +164,11 @@
                 data: cart_data,
                 success: function(response){
                     console.log(response);
+                    if(response == "success")
+                    {
+                        $(".alert-success").slideDown(500).delay(5000).slideUp(500);
+                    }
+                    
                 }
             }); 
         });

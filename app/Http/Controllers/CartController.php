@@ -15,6 +15,9 @@ class CartController extends Controller
         $product_id = $request->get('product_id');
         $selected_color = $request->get('selected_color');
         $selected_size = $request->get('selected_size');
+        //echo $product_id."<br>";
+        //echo $selected_size."<br>";
+        //exit;
         $session_id = Session::getId();
         $user_id=0;
         if(Auth::check()){
@@ -24,7 +27,7 @@ class CartController extends Controller
         if($this->checksessionexists($session_id,$product_id) >0)
         {
             Tempcart::where('session_id',$session_id)->where('product_id',$product_id)->increment('quantity',$quantity);
-            return 'Cart updated successfully';
+            return 'success';
         }
         else
         {
@@ -38,7 +41,7 @@ class CartController extends Controller
             $tempcart ->status= $status;
             $tempcart ->save();
 
-            return 'Cart updated successfully';
+            return 'success';
         }
     }
 
@@ -47,6 +50,32 @@ class CartController extends Controller
         $exists = Tempcart::where('session_id',$session_id)->where('product_id',$product_id)->count();
         //dd($exists."---".$session_id);
         return $exists;
+    }
+
+    public function showcart()
+    {
+        $session_id = Session::getId();
+        $cart_details = Tempcart::where('session_id',$session_id)->get();
+        //dd($session_id);
+        $cart=[];
+        $subtotal =0;
+        $delivary_price = 0;
+        foreach($cart_details as $details)
+        {
+           
+            $shop = Shop::where('id',$details->product_id)->first();
+            $subtotal = $subtotal+$shop->price*$details->quantity;
+            $cart[]=[
+                'id' => $details->id,
+                'product_name' => $shop->name,
+                'product_price' => number_format($shop->price,2),
+                'product_quantity' => $details->quantity,
+                'product_price_total' => number_format(($shop->price*$details->quantity),2),
+            ];
+        }
+       
+        $delivary = number_format($delivary_price,2);
+        return view('cart', ['cart'=>$cart, 'subtotal' =>number_format($subtotal,2), 'delivary'=>$delivary]);
     }
 
     
