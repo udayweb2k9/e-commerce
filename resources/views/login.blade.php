@@ -62,17 +62,17 @@
 				<div class="col-md-5 col-md-offset-1">
 					<div class="contact-wrap">
 						<h3>Login</h3>
-						<form action="#">
+						{!! Form::open(array('url' => URL::to('login', array(), true),'method'=>'POST','files'=>true,'id'=>'login-form','class'=>'main-contact-form' )) !!}
 							<div class="row form-group">
 								<div class="col-md-12">
 									<label for="email">Email</label>
-									<input type="text" id="email" class="form-control" placeholder="Your email address">
+									<input type="text" name="email" id="email" class="form-control" placeholder="Your email address">
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-md-12">
 									<label for="subject">Password</label>
-									<input type="password" id="password" class="form-control" placeholder="Your login password">
+									<input type="password" name="password" id="password" class="form-control" placeholder="Your login password">
 								</div>
 							</div>
 							<div class="form-group text-center">

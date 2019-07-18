@@ -44,21 +44,23 @@
         </div>
         <div class="row">
             <div class="col-md-7">
-                <form method="post" class="colorlib-form">
-                    <h2>Billing Details</h2>
+            
+            <input type="hidden" id="_token" name="_token" class="form-control" value="{{ csrf_token() }}" />   
+            <input type="hidden" id="order_id" name="order_id" class="form-control" value="{{ $cart[0]['order_id'] }}" />   
+                <h2>Billing Details</h2>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
                         <label for="country">Select Country</label>
                             <div class="form-field">
                             <i class="icon icon-arrow-down3"></i>
-                            <select name="people" id="people" class="form-control">
-                                <option value="#">Select country</option>
-                                <option value="#">Alaska</option>
-                                <option value="#">China</option>
-                                <option value="#">Japan</option>
-                                <option value="#">Korea</option>
-                                <option value="#">Philippines</option>
+                            <select name="country" id="country" class="form-control">
+                                <option value="">Select country</option>
+                                <option value="1">Alaska</option>
+                                <option value="2">China</option>
+                                <option value="3">Japan</option>
+                                <option value="4">Korea</option>
+                                <option value="5">Philippines</option>
                             </select>
                             </div>
                         </div>
@@ -66,17 +68,17 @@
                     <div class="form-group">
                             <div class="col-md-6">
                                 <label for="fname">First Name</label>
-                                <input type="text" id="fname" class="form-control" placeholder="Your firstname">
+                                <input type="text" id="fname" class="form-control" value="" placeholder="Your firstname">
                             </div>
                             <div class="col-md-6">
                                 <label for="lname">Last Name</label>
-                                <input type="text" id="lname" class="form-control" placeholder="Your lastname">
+                                <input type="text" id="lname" class="form-control" value="" placeholder="Your lastname">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="companyname">Company Name</label>
-                            <input type="text" id="companyname" class="form-control" placeholder="Company Name">
+                            <input type="text" id="companyname" class="form-control" value="" placeholder="Company Name">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -91,16 +93,16 @@
                     <div class="col-md-12">
                             <div class="form-group">
                                 <label for="companyname">Town/City</label>
-                            <input type="text" id="towncity" class="form-control" placeholder="Town or City">
-                        </div>
+                                <input type="text" id="towncity" class="form-control" placeholder="Town or City">
+                            </div>
                     </div>
                     <div class="form-group">
                             <div class="col-md-6">
                                 <label for="stateprovince">State/Province</label>
-                                <input type="text" id="fname" class="form-control" placeholder="State Province">
+                                <input type="text" id="stateprovince" class="form-control" placeholder="State Province">
                             </div>
                             <div class="col-md-6">
-                                <label for="lname">Zip/Postal Code</label>
+                                <label for="zippostalcode">Zip/Postal Code</label>
                                 <input type="text" id="zippostalcode" class="form-control" placeholder="Zip / Postal">
                             </div>
                         </div>
@@ -111,7 +113,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="Phone">Phone Number</label>
-                                <input type="text" id="zippostalcode" class="form-control" placeholder="">
+                                <input type="text" id="phone" class="form-control" placeholder="">
                             </div>
                         </div>
                         <div class="form-group">
@@ -123,11 +125,11 @@
                             </div>
                         </div>
                 </div>
-            </form>
+            
             </div>
             <div class="col-md-5">
                 <div class="cart-detail">
-                    <h2>Cart Total</h2>
+                    <h2>Cart Total </h2>
                     <ul>
                         <li>
                             <ul>
@@ -137,7 +139,7 @@
                             </ul>
                         </li>
                         <li><span>Shipping</span> <span>$0.00</span></li>
-                        <li><span>Order Total</span> <span>${{ $total }}</span></li>
+                        <li><span>Order Total</span> <span id="order_total">${{ $total }}</span></li>
                     </ul>
                 </div>
                 <div class="cart-detail">
@@ -145,21 +147,21 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="radio">
-                                <label><input type="radio" name="optradio">Direct Bank Tranfer</label>
+                                <label><input type="radio" value="1" name="optradio">Direct Bank Tranfer</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="radio">
-                                <label><input type="radio" name="optradio">Check Payment</label>
+                                <label><input type="radio" value="2" name="optradio">Check Payment</label>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">
                             <div class="radio">
-                                <label><input type="radio" name="optradio">Paypal</label>
+                                <label><input type="radio" value="3" name="optradio">Paypal</label>
                             </div>
                         </div>
                     </div>
@@ -173,7 +175,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <p><a href="#" class="btn btn-primary">Place an order</a></p>
+                        <p><a href="javascript:void(0);" id="place_order" class="btn btn-primary">Place an order</a></p>
                     </div>
                 </div>
             </div>
@@ -181,4 +183,53 @@
     </div>
 </div>
 @endsection
-
+@section('script')
+<script>
+    $(document).ready(function(){
+        var CSRF_TOKEN = $('#_token').val();
+        $("#place_order").click(function(){
+            let country = $('#country').val();
+            let fname = $('#fname').val();
+            let lname = $('#lname').val();
+            let companyname = $('#companyname').val();
+            let address = $('#address').val();
+            let address2 = $('#address2').val();
+            let towncity = $('#towncity').val();
+            let stateprovince = $('#stateprovince').val();
+            let zippostalcode = $('#zippostalcode').val();
+            let email = $('#email').val();
+            let phone = $('#phone').val();
+            let order_id = $('#order_id').val();
+            let payment_method = $("input[name='optradio']:checked").val();
+            let order_total = $("#order_total").html();
+            //alert(order_total);
+    
+            $.ajax({
+                url: 'placeorder',
+                type: 'POST',
+                data: {
+                    _token: CSRF_TOKEN, 
+                    country:country,
+                    fname:fname,
+                    lname:lname,
+                    companyname:companyname,
+                    address:address,
+                    address2:address2,
+                    towncity:towncity,
+                    stateprovince:stateprovince,
+                    zippostalcode:zippostalcode,
+                    email:email,
+                    phone:phone,
+                    payment_method:payment_method,
+                    order_total:order_total,
+                    order_id:order_id
+                },
+                dataType: 'JSON',
+                success: function (data) { 
+                    alert(data);
+                }
+            }); 
+        });
+    });    
+</script>
+@endsection

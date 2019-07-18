@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Hash;
 use Redirect;
+use Auth;
 
 class UserController extends Controller
 {
@@ -30,6 +31,34 @@ class UserController extends Controller
         $user->save();
 
         return Redirect::to('checkout');
+        
+    }
+
+    public function makelogin(Request $request)
+    {
+        $email = $request->get('email');
+        $password = $request->get('password');
+        $status = '1';
+       // dd($email);
+        $auth = Auth::attempt(
+            [
+                'email'  => $email,
+                'password'  => $password,
+                'type'  => '1',					
+                'status'  => '1',   
+                'deleted'  => '0'   
+            ]
+        );
+       // dd(Auth::check());
+        if ($auth) {
+            return Redirect::to('checkout');
+        }
+        else
+        {
+            return Redirect::to('login');  
+        }	
+
+        
         
     }
 }

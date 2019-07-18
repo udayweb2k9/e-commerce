@@ -91,6 +91,10 @@ class CartController extends Controller
 
     public function checkout()
     {
+        $today = date("Ymd");
+        $rand = strtoupper(substr(uniqid(sha1(time())),0,4));
+        $order_id = $today . $rand;
+        //exit;
         $session_id = Session::getId();
         $cart_details = Tempcart::where('session_id',$session_id)->get();
         $cart=[];
@@ -98,12 +102,16 @@ class CartController extends Controller
         $delivary_price = 0;
         foreach($cart_details as $details)
         {
-           
+           if(!$details->order_id)
+           {
+                $update_cart = Tempcart::where('session_id',$session_id)->update(['order_id'=>$order_id]);
+           }
             $shop = Shop::where('id',$details->product_id)->first();
             $subtotal = $subtotal+$shop->price*$details->quantity;
             $cart[]=[
                 'id' => $details->id,
                 'product_name' => $shop->name,
+                'order_id' => $details->order_id,
                 'product_price' => number_format($shop->price,2),
                 'product_quantity' => $details->quantity,
                 'product_price_total' => number_format(($shop->price*$details->quantity),2),
@@ -112,12 +120,19 @@ class CartController extends Controller
        
         $delivary = number_format($delivary_price,2);
         $total = number_format(($subtotal+$delivary_price),2);
+       // dd($cart);
         return view('checkout', [
             'cart'=>$cart, 
             'subtotal' =>number_format($subtotal,2), 
             'delivary'=>$delivary, 
             'total' =>$total
         ]);
+    }
+
+    public function postcheckout(Request $request)
+    {
+        $session_id = Session::getId();
+        dd("A");
     }
 
     

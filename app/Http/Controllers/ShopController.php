@@ -5,11 +5,13 @@ use Illuminate\Http\Request;
 use App\Shop;
 use App\Productcolor;
 use App\Productsize;
+use Carbon\Carbon;
 
 class ShopController extends Controller
 {
     public function products()
     {
+
         $shop = Shop::where('status',1)->orderBy('id','DESC')->get();
         $product_arr=[];
         foreach($shop as $details)

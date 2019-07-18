@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('login','UserController@login');
 Route::post('registerd','UserController@registerd');
+Route::post('login','UserController@makelogin');
+
 
 
 Route::get('about','ContentAboutController@about');
@@ -27,3 +29,7 @@ Route::get('shop/details/{id}','ShopController@productdetails');
 Route::get('cart','CartController@showcart');
 Route::post('addcart','CartController@addcart');
 Route::get('checkout','CartController@checkout');
+Route::post('checkout','CartController@postcheckout');
+Route::post('payment','PaymentController@payment');
+Route::post('placeorder','PaymentController@placeorder');
+Route::post('success','PaymentController@success');
